@@ -9,10 +9,11 @@ const Home = () => {
             <div className='h-80 flex flex-col '>
                 <Nav></Nav>
                 <div className='mt-20'>
-                    <SearchNav ></SearchNav>
+                    <SearchNav ></SearchNav>                                           
                 </div>
                 <AnimatedBackground height={80} />
             </div>
+            
         </div>
     );
 };

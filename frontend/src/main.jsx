@@ -19,6 +19,8 @@ import {
   QueryClientProvider,
 } from '@tanstack/react-query'
 import AuthProvider from './config/AuthProvider';
+import AddJob from './components/AddJob';
+import UserPrivate from './components/shared/UserPrivate';
 const queryClient = new QueryClient()
 
 const router = createBrowserRouter([
@@ -39,6 +41,9 @@ const router = createBrowserRouter([
         path:'/register',
         element:<Signup></Signup>
 
+      },{
+        path:'/add_job',
+        element:<UserPrivate><AddJob></AddJob></UserPrivate>
       }
     ]
   },

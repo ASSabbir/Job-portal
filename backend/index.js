@@ -5,7 +5,6 @@ const cors = require('cors');
 // const cookieParser = require('cookie-parser')
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const app = express();
-// const stripe=require('stripe')(process.env.STRIPE_KEY)
 const port = process.env.PORt || 5000;
 
 
@@ -33,7 +32,7 @@ app.use(express.json())
 
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.hyv8hzg.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
 
-// Create a MongoClient with a MongoClientOptions object to set the Stable API version
+
 const client = new MongoClient(uri, {
   serverApi: {
     version: ServerApiVersion.v1,
@@ -48,10 +47,12 @@ async function run() {
     const userCollection=database.createCollection('user')
     
     app.get('/',(req,res)=>{
-        res.send('hiii')
+        res.send({messge: 'Job portal is working perfectly'})
     })
-    app.post('/add_user',(req,res)=>{
-        console.log(req)
+    app.post('/add_user',async(req,res)=>{
+        console.log(req.body)
+        const result =(await userCollection).insertOne(req.body)
+        res.send(result)
     })
 
 

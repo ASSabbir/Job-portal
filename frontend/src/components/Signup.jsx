@@ -31,18 +31,18 @@ const Signup = () => {
     // from submit function 
     const handleFormSubmit = async (e) => {
         e.preventDefault();
-        
-        const email = e.target.email.value;
-        const confirmpassword=e.target.confirmpassword.value;
-        const password = e.target.password.value;
-       console.log(password)
 
-        if (email === '' ||  password === '' ||confirmpassword == '') {
+        const email = e.target.email.value;
+        const confirmpassword = e.target.confirmpassword.value;
+        const password = e.target.password.value;
+        console.log(password)
+
+        if (email === '' || password === '' || confirmpassword == '') {
             Toast.fire({
                 icon: "error",
                 title: 'All fields must be filled out.'
             });
-            
+
             return
         }
         if (password !== confirmpassword) {
@@ -50,34 +50,39 @@ const Signup = () => {
                 icon: "error",
                 title: "Password don't match"
             });
-            
+
             return
         }
+        const data = { email, password }
+        axios.post('http://localhost:5000/add_user', data)
+            .then(res => console.log(res.data))
+            .catch(error => { console.log(error) })
+        
+        
 
-        
-        
+
 
         // handel firebase
-        handelSignup(email, password)
-                .then(user => {
-                    Toast.fire({
-                                icon: "success",
-                                title: `WelCome ${auth.currentUser.email} `
-                            });
-                            // const user = { email, role }
-                            // axios.post('https://learnbridge-red.vercel.app/users', user)
-                            //     .then(res => console.log(res.data))
-                            //     .catch(error => { console.log(error) })
-                            // navg(location.state ? location.state : '/')
-                            console.log(user)
-                })
-                .catch(error => {
-                    Toast.fire({
-                        icon: "error",
-                        title: error
-                    });
-                    
-                })
+        // handelSignup(email, password)
+        //         .then(user => {
+        //             Toast.fire({
+        //                         icon: "success",
+        //                         title: `WelCome ${auth.currentUser.email} `
+        //                     });
+        //                     const data = { email, password }
+        //                     axios.post('http://localhost:5000/add_users', data)
+        //                         .then(res => console.log(res.data))
+        //                         .catch(error => { console.log(error) })
+        //                     navg(location.state ? location.state : '/')
+        //                     console.log(user)
+        //         })
+        //         .catch(error => {
+        //             Toast.fire({
+        //                 icon: "error",
+        //                 title: error
+        //             });
+
+        //         })
     };
     const handelgoogle = () => {
         googleSign()
@@ -126,12 +131,12 @@ const Signup = () => {
                             </div>
                             <div className="space-y-1 text-sm">
                                 <label htmlFor="password" className="block ">Password</label>
-                                <input type="password" name="password"  placeholder="Password" className="w-full px-4 py-3    outline-none border-b-1 border-[#05AF2B]" />
+                                <input type="password" name="password" placeholder="Password" className="w-full px-4 py-3    outline-none border-b-1 border-[#05AF2B]" />
 
                             </div>
                             <div className="space-y-1 text-sm">
                                 <label htmlFor="password" className="block ">Confirm Password</label>
-                                <input type="password" name="confirmpassword"  placeholder="Password" className="w-full px-4 py-3    outline-none border-b-1 border-[#05AF2B]" />
+                                <input type="password" name="confirmpassword" placeholder="Password" className="w-full px-4 py-3    outline-none border-b-1 border-[#05AF2B]" />
 
                             </div>
                             <button className="block w-full p-3 text-center rounded-sm text-white bg-[#05AF2B] hover:bg-green-500 ">Sign Up</button>

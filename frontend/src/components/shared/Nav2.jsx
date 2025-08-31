@@ -1,11 +1,15 @@
-import React from 'react';
+
+
 import logo from '/logo.png'
 import { PiWindowsLogo } from 'react-icons/pi';
-import AnimatedBackground from './shared/AnimatedBackground';
-const Nav = () => {
+
+const Nav2 = () => {
     return (
         <div className=''>
-           
+            <div className={`absolute inset-0 -z-10 h-19  overflow-hidden bg-[#001a00]`}>
+      <div className="absolute w-[30%] h-[30%] -top-10 -left-10 rounded-full opacity-50 blur-xl animate-mesh-1"></div>
+      <div className="absolute w-[20%] h-[20%] -bottom-10 -right-10 rounded-full opacity-50 blur-xl animate-mesh-2"></div>
+    </div>
             <div className="navbar max-w-[1400px] mx-auto border-b-1 border-[#212b18] ">
                 <div className="flex-1 flex  items-center gap-3">
                     <img src={logo} alt="" className='w-56'/>
@@ -46,4 +50,4 @@ const Nav = () => {
     );
 };
 
-export default Nav;
+export default Nav2;

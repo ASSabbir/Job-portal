@@ -19,7 +19,7 @@ const Nav2 = () => {
         }
     });
     const { user, logout } = useContext(AuthContext)
-    console.log(user)
+    
     const handelLogout = () => {
         logout()
             .then(() => {

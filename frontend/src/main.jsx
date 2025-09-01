@@ -21,6 +21,7 @@ import {
 import AuthProvider from './config/AuthProvider';
 import AddJob from './components/AddJob';
 import UserPrivate from './components/shared/UserPrivate';
+import JobDetails from './components/JobDetails';
 const queryClient = new QueryClient()
 
 const router = createBrowserRouter([
@@ -44,6 +45,9 @@ const router = createBrowserRouter([
       },{
         path:'/add_job',
         element:<UserPrivate><AddJob></AddJob></UserPrivate>
+      },{
+        path:'/job/:id',
+        element:<JobDetails></JobDetails>
       }
     ]
   },

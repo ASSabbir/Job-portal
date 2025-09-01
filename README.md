@@ -3,8 +3,8 @@
 A simple **Job Portal Application** built using **React (frontend), Express & MongoDB (backend), and Firebase (authentication)**.  
 This project is part of the **MERN Developer Intern Task** and implements **CRUD functionality, authentication, role-based access, and search features**.  
 
-![Banner](/banner.png) 
-![LogIn](/login.png) 
+![Banner](https://raw.githubusercontent.com/ASSabbir/Job-portal/refs/heads/main/frontend/public/banner.png) 
+![LogIn](https://raw.githubusercontent.com/ASSabbir/Job-portal/refs/heads/main/frontend/public/login.png) 
 
 ---
 

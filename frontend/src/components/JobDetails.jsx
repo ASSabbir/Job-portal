@@ -12,15 +12,15 @@ const JobDetails = () => {
     const nav = useNavigate()
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [formData, setFormData] = useState({});
-    
+
     const { isPending, error, data: job, refetch } = useQuery({
         queryKey: [id, 'jobs'],
         queryFn: () =>
-            fetch(`http://localhost:5000/job/${id}`).then((res) =>
+            fetch(`https://backend-dun-omega-67.vercel.app/job/${id}`).then((res) =>
                 res.json(),
             ),
     })
-    
+
 
     const handelDelete = (id) => {
         Swal.fire({
@@ -35,7 +35,7 @@ const JobDetails = () => {
         }).then(async (result) => {
             if (result.isConfirmed) {
                 try {
-                    const res = await axios.delete(`http://localhost:5000/job/${id}`);
+                    const res = await axios.delete(`https://backend-dun-omega-67.vercel.app/job/${id}`);
 
                     if (res.data.success) {
                         Swal.fire({
@@ -71,7 +71,7 @@ const JobDetails = () => {
         e.preventDefault();
         console.log(id)
         try {
-            const res = await axios.put(`http://localhost:5000/job/${id}`, formData);
+            const res = await axios.put(`https://backend-dun-omega-67.vercel.app/job/${id}`, formData);
 
             if (res.data.success) {
                 Swal.fire("Updated!", res.data.message, "success");
@@ -90,6 +90,18 @@ const JobDetails = () => {
     </div>
 
     if (error) return 'An error has occurred: ' + error.message
+    const user = localStorage.getItem('user').replace(/"/g, "")
+
+    
+    const handelApply = () => {
+
+        Swal.fire({
+            title: "Application Submitted!",
+            text: "You have successfully applied for this job.",
+            icon: "success"
+        });
+    }
+
 
     return (
         <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
@@ -160,21 +172,37 @@ const JobDetails = () => {
 
                     {/* Apply Button */}
                     <div className="pt-4 flex items-center justify-between gap-10">
-                        <button className="w-full md:w-auto px-6 py-3 rounded-xl bg-green-600 text-white font-semibold hover:bg-blue-700 transition">
+                        <button onClick={() => handelApply()} className="w-full md:w-auto px-6 py-3 rounded-xl bg-green-600 text-white font-semibold hover:bg-blue-700 transition">
                             Apply Now
                         </button>
-                        <div className='flex flex-col gap-3 '>
-                            <button onClick={openModal} className='underline text-xl cursor-pointer text-blue-700'>
-                                Update
-                            </button>
-                            <button onClick={() => handelDelete(job._id)} className='underline text-xl cursor-pointer text-red-700'>
-                                Delete
-                            </button>
-                        </div>
+                        {
+
+                            user === job.email ?
+                                <div className='flex flex-col gap-3 '>
+                                    <button onClick={openModal} className='underline text-xl cursor-pointer text-blue-700'>
+                                        Update
+                                    </button>
+                                    <button onClick={() => handelDelete(job._id)} className='underline text-xl cursor-pointer text-red-700'>
+                                        Delete
+                                    </button>
+                                </div>
+                                :
+                                <div className='flex flex-col gap-3 opacity-50'>
+                                    <button className='underline text-xl cursor-not-allowed text-blue-700'>
+                                        Update
+                                    </button>
+                                    <button className='underline text-xl cursor-not-allowed text-red-700'>
+                                        Delete
+                                    </button>
+                                </div>
+
+
+                        }
+
                     </div>
                 </div>
             </div>
-            {/* ✅ Update Modal */}
+            {/*Update Modal */}
             {isModalOpen && (
                 <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
                     <div className="bg-white rounded-xl p-6 w-full max-w-lg shadow-2xl">
@@ -207,7 +235,7 @@ const JobDetails = () => {
                                 placeholder="Deadline"
                                 className="w-full p-2 border rounded"
                             />
-                            <label htmlFor="">Deadline</label>
+                            <label htmlFor="">Description</label>
                             <textarea
                                 name="description"
                                 value={formData.description || ""}

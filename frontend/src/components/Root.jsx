@@ -5,10 +5,11 @@ import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import AnimatedBackground from './shared/AnimatedBackground';
 import SearchNav from './shared/SearchNav';
 import Nav2 from './shared/Nav2';
+import Footer from './Footer';
 
 const Root = () => {
     const nav = useLocation()
-    console.log(nav.pathname)
+    
     return (
         <div>
             {
@@ -16,6 +17,10 @@ const Root = () => {
             }
 
             <Outlet></Outlet>
+            {
+                nav.pathname==='/'? <div></div> :<Footer></Footer>
+            }
+            
         </div>
     );
 };

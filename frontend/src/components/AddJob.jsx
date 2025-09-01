@@ -90,7 +90,7 @@ const AddJob = () => {
 
                 const jobDetails = { ...job, photo: url }
                 console.log(jobDetails)
-                axios.post('http://localhost:5000/add_job', jobDetails)
+                axios.post('https://backend-dun-omega-67.vercel.app/add_job', jobDetails)
                     .then(res => {
 
                         if (res.data.acknowledged == true) {

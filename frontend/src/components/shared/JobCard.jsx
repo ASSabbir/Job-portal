@@ -10,7 +10,7 @@ const JobCard = ({ job }) => {
         year: "numeric",
     });
 
-    console.log(today);
+   
     return (
         <div className=" w-full rounded-lg hover:shadow-2xl duration-300 p-4 space-y-7">
             <h1 className='text-gray-600 ml-5'>{today}</h1>
